@@ -10,9 +10,28 @@ import UIKit
 
 class CanvasView: UIView {
     
-    let currentMap = WorldMap(width: 800, height: 800)
+    var currentMap = WorldMap(width: 800, height: 800)
+    var bg = UIImageView()
+    var lf = UIImageView()
     
-    override func draw(_ rect: CGRect) {
-        <#code#>
+    func setBackgroundLayer() -> UIImageView {
+        let bg = currentMap.background
+        let layer = UIImageView()
+        layer.image = bg
+        addSubview(layer)
+        return layer
+    }
+    
+    func setLandformsLayer() -> UIImageView {
+        let lf = currentMap.landforms
+        let layer = UIImageView()
+        layer.image = lf
+        addSubview(layer)
+        return layer
+    }
+    
+    func drawMap() {
+        bg = setBackgroundLayer()
+        lf = setLandformsLayer()
     }
 }
