@@ -10,4 +10,9 @@ import UIKit
 
 class CanvasView: UIView {
     
+    let currentMap = WorldMap(width: 800, height: 800)
+    
+    override func draw(_ rect: CGRect) {
+        <#code#>
+    }
 }
