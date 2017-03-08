@@ -14,11 +14,15 @@ class CanvasView: UIView {
     var bg = UIImageView()
     var lf = UIImageView()
     
+    var testRects = []()
+    
     func setBackgroundLayer() -> UIImageView {
         let bg = currentMap.background
         let layer = UIImageView()
         layer.image = bg
         addSubview(layer)
+        layer.isOpaque = true
+        layer.frame = CGRect(x: 0, y: 0, width: currentMap.width, height: currentMap.height)
         return layer
     }
     
@@ -27,6 +31,8 @@ class CanvasView: UIView {
         let layer = UIImageView()
         layer.image = lf
         addSubview(layer)
+        layer.isOpaque = true
+        layer.frame = CGRect(x: 0, y: 0, width: currentMap.width, height: currentMap.height)
         return layer
     }
     
@@ -34,4 +40,11 @@ class CanvasView: UIView {
         bg = setBackgroundLayer()
         lf = setLandformsLayer()
     }
+    
+    func drawRectOnLand() {
+        let renderer = UIGraphicsImageRenderer()
+        
+        
+    }
+
 }
