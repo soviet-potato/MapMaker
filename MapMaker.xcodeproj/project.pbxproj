@@ -15,6 +15,7 @@
 		0E44287E1E649937004CA3A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E44287C1E649937004CA3A5 /* LaunchScreen.storyboard */; };
 		A4BE491E1E6510F6006E4019 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BE491D1E6510F6006E4019 /* CanvasView.swift */; };
 		A4BE49201E651126006E4019 /* WorldMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BE491F1E651126006E4019 /* WorldMap.swift */; };
+		A4BE49461E79AD3D006E4019 /* TempCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BE49451E79AD3D006E4019 /* TempCanvasView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		0E44287F1E649937004CA3A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4BE491D1E6510F6006E4019 /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		A4BE491F1E651126006E4019 /* WorldMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldMap.swift; sourceTree = "<group>"; };
+		A4BE49451E79AD3D006E4019 /* TempCanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempCanvasView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				0E4428701E649936004CA3A5 /* AppDelegate.swift */,
 				A4BE491D1E6510F6006E4019 /* CanvasView.swift */,
+				A4BE49451E79AD3D006E4019 /* TempCanvasView.swift */,
 				A4BE491F1E651126006E4019 /* WorldMap.swift */,
 				0E4428721E649936004CA3A5 /* ViewController.swift */,
 				0E4428741E649937004CA3A5 /* Main.storyboard */,
@@ -149,6 +152,7 @@
 				0E4428711E649936004CA3A5 /* AppDelegate.swift in Sources */,
 				A4BE49201E651126006E4019 /* WorldMap.swift in Sources */,
 				A4BE491E1E6510F6006E4019 /* CanvasView.swift in Sources */,
+				A4BE49461E79AD3D006E4019 /* TempCanvasView.swift in Sources */,
 				0E4428791E649937004CA3A5 /* MapMaker.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

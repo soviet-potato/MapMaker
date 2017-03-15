@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,23 +15,40 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MapMaker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="iWF-BD-Qqc"/>
+                        <viewControllerLayoutGuide type="bottom" id="tjV-gH-7S4"/>
                     </layoutGuides>
-                    <stackView key="view" opaque="NO" contentMode="scaleToFill" axis="vertical" id="30N-5h-P2K">
+                    <view key="view" contentMode="scaleToFill" id="iLE-LL-Ay1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xqs-YV-aeF" customClass="CanvasView" customModule="MapMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ucw-VL-I9S" customClass="CanvasView" customModule="MapMaker" customModuleProvider="target">
+                                <rect key="frame" x="16" y="20" width="343" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJO-I9-Ixm" customClass="TempCanvasView" customModule="MapMaker" customModuleProvider="target">
+                                <rect key="frame" x="16" y="20" width="343" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
-                    </stackView>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="yPk-HI-uYl"/>
-                    </toolbarItems>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tjV-gH-7S4" firstAttribute="top" secondItem="ucw-VL-I9S" secondAttribute="bottom" id="7Ej-WF-zdC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aJO-I9-Ixm" secondAttribute="trailing" id="bwe-Tr-dVa"/>
+                            <constraint firstItem="tjV-gH-7S4" firstAttribute="top" secondItem="aJO-I9-Ixm" secondAttribute="bottom" id="hOx-El-tn2"/>
+                            <constraint firstItem="aJO-I9-Ixm" firstAttribute="leading" secondItem="iLE-LL-Ay1" secondAttribute="leadingMargin" id="inc-uv-cR4"/>
+                            <constraint firstItem="aJO-I9-Ixm" firstAttribute="top" secondItem="iWF-BD-Qqc" secondAttribute="bottom" id="nkz-Dv-e6I"/>
+                            <constraint firstItem="ucw-VL-I9S" firstAttribute="top" secondItem="iWF-BD-Qqc" secondAttribute="bottom" id="oBu-LB-WWw"/>
+                            <constraint firstItem="ucw-VL-I9S" firstAttribute="leading" secondItem="iLE-LL-Ay1" secondAttribute="leadingMargin" id="sLg-V5-SDL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ucw-VL-I9S" secondAttribute="trailing" id="xzB-Ef-dkf"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="canvasView" destination="ucw-VL-I9S" id="V6Z-J9-psU"/>
+                        <outlet property="tempCanvas" destination="aJO-I9-Ixm" id="5dW-wH-zaY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

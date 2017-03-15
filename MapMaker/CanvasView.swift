@@ -8,14 +8,14 @@
 
 import UIKit
 
-class CanvasView: UIView {
+class CanvasView: UIImageView {
     
     var currentMap = WorldMap(width: 800, height: 800)
     var bg = UIImageView()
     var lf = UIImageView()
-    
-    var testRects = []()
-    
+	
+	let layers = Dictionary<Int, UIImageView>()
+	
     func setBackgroundLayer() -> UIImageView {
         let bg = currentMap.background
         let layer = UIImageView()
@@ -40,11 +40,7 @@ class CanvasView: UIView {
         bg = setBackgroundLayer()
         lf = setLandformsLayer()
     }
-    
-    func drawRectOnLand() {
-        let renderer = UIGraphicsImageRenderer()
-        
-        
-    }
+	
+	
 
 }
