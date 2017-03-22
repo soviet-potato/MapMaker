@@ -8,15 +8,36 @@
 
 import UIKit
 
-class CanvasView: UIImageView {
+class CanvasView: UIView {
     
     var currentMap = WorldMap(width: 800, height: 800)
-    var bg = UIImageView()
-    var lf = UIImageView()
 	
-	let layers = Dictionary<Int, UIImageView>()
+	//0 is background, 1 is landforms, 2 is political, 3 is icons
+	var layers = [UIImageView(), UIImageView(), UIImageView(), UIImageView()]
 	
-    func setBackgroundLayer() -> UIImageView {
+	func populateLayersFromMap() {
+		layers[0].image = currentMap.background
+		layers[1].image = currentMap.landforms
+		//layers[2].image = currentMap.political
+		//layers[3].image = currentMap.icons
+	}
+	
+	override func draw(_ rect: CGRect) {
+		drawLayerInCanvas(image: layers[0])
+		drawLayerInCanvas(image: layers[1])
+	}
+	
+	func drawLayerInCanvas(image: UIImageView) {
+		let startX = Int(self.center.x) - currentMap.width / 2
+		let startY = Int(self.center.y) - currentMap.height / 2
+		let tempLayer = image
+		addSubview(image)
+		tempLayer.isOpaque = true
+		tempLayer.backgroundColor = UIColor.clear
+		tempLayer.frame = CGRect(x: startX, y: startY, width: currentMap.width, height: currentMap.height)
+	}
+	
+    /*func setBackgroundLayer() -> UIImageView {
         let bg = currentMap.background
         let layer = UIImageView()
         layer.image = bg
@@ -39,7 +60,7 @@ class CanvasView: UIImageView {
     func drawMap() {
         bg = setBackgroundLayer()
         lf = setLandformsLayer()
-    }
+    }*/
 	
 	
 

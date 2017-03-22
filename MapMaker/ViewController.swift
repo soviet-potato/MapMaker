@@ -14,14 +14,22 @@ class ViewController: UIViewController {
 	
 	@IBOutlet var tempCanvas: TempCanvasView!
 	
+	//these are important. don't change them.
 	var lastPoint = CGPoint.zero
 	var swiped = false
 	
+	//layers: 0 is background, 1 is landforms, 2 is political, 3 is icons (2 and 3 later)
+	var editingLayer = 1
+	
+	//brush characteristics here
+	
+	//this detects when a touch happens and sets it as the starting point
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		swiped = false
 		lastPoint = (touches.first?.location(in: self.view))!
 	}
 	
+	//this detects when a touch moves and draws a line along the movement
 	override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 		swiped = true
 		let currentPoint = touches.first?.location(in: self.view)
@@ -29,6 +37,7 @@ class ViewController: UIViewController {
 		lastPoint = currentPoint!
 	}
 	
+	//this detects when a touch ends, and either draws a point if the touch didn't move or just draws the rest of the way, then merges the temp lines with the base canvas - should merge with the proper layer, need to fix that
 	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 		
 		if !swiped {
@@ -37,17 +46,21 @@ class ViewController: UIViewController {
 		
 		UIGraphicsBeginImageContext(view.frame.size)
 		
-		canvasView.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+		let currentLayer = canvasView.layers[editingLayer]
+		
+		currentLayer.draw(CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
 		
 		tempCanvas.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
 		
-		canvasView.image = UIGraphicsGetImageFromCurrentImageContext()
+		currentLayer.image = UIGraphicsGetImageFromCurrentImageContext()
 		
 		UIGraphicsEndImageContext()
 		
 		tempCanvas.image = nil
 	}
 	
+	
+	//this is the function that actually draws the line. qualities of the line are set in here, as properties of context
 	func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
 		UIGraphicsBeginImageContext(view.frame.size)
 		tempCanvas.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
@@ -57,6 +70,7 @@ class ViewController: UIViewController {
 		context?.move(to: fromPoint)
 		context?.addLine(to: toPoint)
 		
+		//this is where the line qualities are set
 		context?.setLineCap(.round)
 		context?.setLineWidth(10.0)
 		
@@ -68,7 +82,7 @@ class ViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        canvasView.drawMap()
+        canvasView.populateLayersFromMap()
     }
 
     override func didReceiveMemoryWarning() {

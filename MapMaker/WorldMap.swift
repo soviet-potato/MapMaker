@@ -14,12 +14,16 @@ class WorldMap {
     let width: Int
     var landforms: UIImage
     var background: UIImage
+	var political: UIImage
+	var icons: UIImage
     
     init(width: Int, height: Int) {
         self.height = height
         self.width = width
         self.background = UIImage(color: UIColor.blue, size: CGSize(width: self.width, height: self.height))!
         self.landforms = self.background
+		self.political = UIImage()
+		self.icons = UIImage()
     }
 }
 
