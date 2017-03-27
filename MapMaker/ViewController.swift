@@ -48,9 +48,14 @@ class ViewController: UIViewController {
 		
 		let currentLayer = canvasView.layers[editingLayer]
 		
-		currentLayer.draw(CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+		let width = canvasView.currentMap.width
+		let height = canvasView.currentMap.height
+		let startX = Int(canvasView.center.x) - width / 2
+		let startY = Int(canvasView.center.y) - height / 2
 		
-		tempCanvas.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+		currentLayer.draw(CGRect(x: startX, y: startY, width: width, height: height))
+		
+		tempCanvas.image?.draw(in: CGRect(x: startX, y: startY, width: width, height: height))
 		
 		currentLayer.image = UIGraphicsGetImageFromCurrentImageContext()
 		
@@ -63,7 +68,12 @@ class ViewController: UIViewController {
 	//this is the function that actually draws the line. qualities of the line are set in here, as properties of context
 	func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
 		UIGraphicsBeginImageContext(view.frame.size)
-		tempCanvas.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+		let width = canvasView.currentMap.width
+		let height = canvasView.currentMap.height
+		let startX = Int(canvasView.center.x) - width / 2
+		let startY = Int(canvasView.center.y) - height / 2
+
+		tempCanvas.image?.draw(in: CGRect(x: startX, y: startY, width: width, height: height))
 		
 		let context = UIGraphicsGetCurrentContext()
 		
