@@ -40,22 +40,24 @@ class ViewController: UIViewController {
 	//this detects when a touch ends, and either draws a point if the touch didn't move or just draws the rest of the way, then merges the temp lines with the base canvas - should merge with the proper layer, need to fix that
 	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 		
-		if !swiped {
-			drawLineFrom(fromPoint: lastPoint, toPoint: lastPoint)
-		}
-		
-		UIGraphicsBeginImageContext(view.frame.size)
-		
-		let currentLayer = canvasView.layers[editingLayer]
-		
 		let width = canvasView.currentMap.width
 		let height = canvasView.currentMap.height
 		let startX = Int(canvasView.center.x) - width / 2
 		let startY = Int(canvasView.center.y) - height / 2
 		
-		currentLayer.draw(CGRect(x: startX, y: startY, width: width, height: height))
+		let canvasRect = CGRect(x: startX, y: startY, width: width, height: height)
 		
-		tempCanvas.image?.draw(in: CGRect(x: startX, y: startY, width: width, height: height))
+		if !swiped {
+			drawLineFrom(fromPoint: lastPoint, toPoint: lastPoint)
+		}
+		
+		UIGraphicsBeginImageContext(self.view.frame.size)
+		
+		let currentLayer = canvasView.layers[editingLayer]
+		
+		currentLayer.draw(canvasRect)
+		
+		tempCanvas.image?.draw(in: canvasRect)
 		
 		currentLayer.image = UIGraphicsGetImageFromCurrentImageContext()
 		
@@ -67,13 +69,10 @@ class ViewController: UIViewController {
 	
 	//this is the function that actually draws the line. qualities of the line are set in here, as properties of context
 	func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
-		UIGraphicsBeginImageContext(view.frame.size)
-		let width = canvasView.currentMap.width
-		let height = canvasView.currentMap.height
-		let startX = Int(canvasView.center.x) - width / 2
-		let startY = Int(canvasView.center.y) - height / 2
+		
+		UIGraphicsBeginImageContext(self.view.frame.size)
 
-		tempCanvas.image?.draw(in: CGRect(x: startX, y: startY, width: width, height: height))
+		tempCanvas.image?.draw(in: self.view.frame)
 		
 		let context = UIGraphicsGetCurrentContext()
 		
