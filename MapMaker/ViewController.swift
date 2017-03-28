@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -19,7 +20,7 @@ class ViewController: UIViewController {
 	var swiped = false
 	
 	//layers: 0 is background, 1 is landforms, 2 is political, 3 is icons (2 and 3 later)
-	var editingLayer = 0
+	var editingLayer = 1
 	
 	//brush characteristics here
 	
@@ -44,15 +45,15 @@ class ViewController: UIViewController {
 			drawLineFrom(fromPoint: lastPoint, toPoint: lastPoint)
 		}
 		
-		UIGraphicsBeginImageContext(view.frame.size)
-		
 		let currentLayer = canvasView.layers[editingLayer]
 		
-		currentLayer.image?.draw(in: self.view.frame)
+		UIGraphicsBeginImageContext(view.frame.size)
 		
-		tempCanvas.image?.draw(in: self.view.frame)
+		currentLayer.image?.draw(in: view.frame)
 		
-		currentLayer.image = cropViewToMapSize()
+		tempCanvas.image?.draw(in: view.frame)
+		
+		currentLayer.image = UIGraphicsGetImageFromCurrentImageContext()
 		
 		UIGraphicsEndImageContext()
 		
@@ -81,18 +82,21 @@ class ViewController: UIViewController {
 		tempCanvas.image = UIGraphicsGetImageFromCurrentImageContext()
 	}
 	
-	func cropViewToMapSize()->UIImage {
+	/* This function was nice to have but has been rendered unnecessary - might be useful later, though
+	
+	func cropViewToMapSize(image: UIImage)->UIImage {
 		let startX = CGFloat(canvasView.frame.width / 2) - CGFloat(canvasView.currentMap.width / 2)
 		let startY = CGFloat(canvasView.frame.height / 2) - CGFloat(canvasView.currentMap.height / 2)
 		let cropStart = CGPoint(x: startX, y: startY)
 		let cropSize = CGSize(width: canvasView.currentMap.width, height: canvasView.currentMap.height)
 		
 		let cropBounds = CGRect(origin: cropStart, size: cropSize)
+		
+		let imageRef = image.cgImage!.cropping(to: cropBounds)
 
-		return (UIGraphicsGetImageFromCurrentImageContext()?.crop(rect: cropBounds))!
-	}
+		return UIImage(cgImage: imageRef!)
+	}*/
 
-	
     override func viewDidLoad() {
         super.viewDidLoad()
         canvasView.populateLayersFromMap()
@@ -106,17 +110,12 @@ class ViewController: UIViewController {
 
 }
 
-extension UIImage {
+/*extension UIImage {
 	func crop(rect: CGRect) -> UIImage {
-		var rect = rect
-		rect.origin.x *= self.scale
-		rect.origin.y *= self.scale
-		rect.size.width *= self.scale
-		rect.size.height *= self.scale
-		
+		let rect = rect
 		let imageRef = self.cgImage!.cropping(to: rect)
-		let image = UIImage(cgImage: imageRef!, scale: self.scale, orientation: self.imageOrientation)
+		let image = UIImage(cgImage: imageRef!)
 		return image
 	}
-}
+}*/
 
