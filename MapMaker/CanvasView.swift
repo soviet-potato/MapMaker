@@ -24,7 +24,7 @@ class CanvasView: UIView {
 	
 	override func draw(_ rect: CGRect) {
 		drawLayerInCanvas(image: layers[0])
-		drawLayerInCanvas(image: layers[1])
+		//drawLayerInCanvas(image: layers[1])
 	}
 	
 	func drawLayerInCanvas(image: UIImageView) {
